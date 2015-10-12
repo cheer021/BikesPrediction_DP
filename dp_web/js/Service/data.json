@@ -1,0 +1,23 @@
+{
+    "mtlStations": [{
+        "id": 1212,
+        "name": "University",
+        "bikes": 23,
+        "lastupdate": "Oct-9th-2015 12:23pm"
+    }, {
+        "id": 12321,
+        "name": "Alymer",
+        "bikes": 12,
+        "lastupdate": "Oct-9th-2015 12:22pm"
+    }, {
+        "id": 2233,
+        "name": "Durocher",
+        "bikes": 2123,
+        "lastupdate": "Oct-9th-2015 12:28pm"
+    }, {
+        "id": 123,
+        "name": "Parc Ave.",
+        "bikes": 212,
+        "lastupdate": "Oct-9th-2015 12:50pm"
+    }]
+}

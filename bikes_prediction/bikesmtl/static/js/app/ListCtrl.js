@@ -1,7 +1,7 @@
 angular.module('myApp.ListCtrl', []).
-controller('driversController', function($scope, BikesMtl) {
+controller('driversController', function($scope, StationDataServiceMtl) {
     $scope.names = [];
-    BikesMtl.all().success(
+    StationDataServiceMtl.all().success(
         function putIntoData(response) {
 
             // body...

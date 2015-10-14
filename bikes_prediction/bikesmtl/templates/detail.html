@@ -1,0 +1,8 @@
+{% if station %}
+    <h1>{{ station.name }}</h1>
+    Bikes: {{ station.nbBikes }}
+    Docks: {{ station.nbEmptyDocks }}
+{% else %}
+    <p>Station not available.</p>
+{% endif %}
+

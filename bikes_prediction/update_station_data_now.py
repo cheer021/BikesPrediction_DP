@@ -19,7 +19,7 @@ for ele in root.xpath("//stations/station"):
 	if ele.xpath("installed")[0].text == "true" and ele.xpath("locked")[0].text == "false":
 		# station = StationDataNow(station = Station.objects.filter(station_id = int(ele.xpath("id")[0].text))[0], nb_bikes = int(ele.xpath("nbBikes")[0].text), nb_empty_docks = int(ele.xpath("nbEmptyDocks")[0].text), datetime = timezone.now(), last_comm_with_server = lastUpdate)
 		# station.save()
-		station = StationDataNow.objects.filter(station.station_id = int(ele.xpath("id")[0].text))
+		station = StationDataNow.objects.get(station = Station.objects.get(station_id = int(ele.xpath("id")[0].text)))
 		station.nb_bikes = int(ele.xpath("nbBikes")[0].text)
 		station.nb_empty_docks = int(ele.xpath("nbEmptyDocks")[0].text)
 		station.datetime = timezone.now()

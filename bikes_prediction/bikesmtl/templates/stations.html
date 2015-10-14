@@ -1,0 +1,36 @@
+<!-- {% if station_data_now_list %}
+    <ul>
+    {% for station in station_data_now_list %}
+        <li><a href="/bikesmtl/{{ station.station.station_id }}/">{{ station.station.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %} -->
+
+<div id="stationDataNow">
+  <p>The available bikes near you</p>
+  <input type="text" ng-model="nameFilter" placeholder="Search..."/>
+  <table>
+  <thead>
+        <tr><th colspan="4">The available bikes in Montreal</th></tr>
+        <tr>
+        <td>Station Id</td>
+        <td>Name</td>
+        <td>Bikes</td>
+        <td>Docks</td>
+        <td>Last Update</td></tr>
+  </thead>
+  <tbody>
+
+    <tr ng-repeat="x in names | filter: nameFilter">
+    
+    <td> {{x.id}} </td>
+    <td> {{x.name}} </td>
+    <td> {{x.nbBikes }}</td>
+    <td> {{x.nbEmptyDocks }}</td>
+    <td>{{x.lastCommWithServer}}</td>
+  </tr>
+  </tbody>
+  </table>
+</div>

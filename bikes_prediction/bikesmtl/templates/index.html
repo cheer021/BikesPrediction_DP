@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+{% if station_data_now_list %}
+    <ul>
+    {% for station in station_data_now_list %}
+        <li><a href="/bikesmtl/{{ station.station.station_id }}/">{{ station.station.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No stations are available.</p>
+{% endif %}
+
+</body>
+</html>

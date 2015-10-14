@@ -23,11 +23,11 @@
  * Description
  */
 angular.module('myApp.services', [])
-.factory('BikesMtl', BikesMtl);
+.factory('StationDataServiceMtl', StationDataServiceMtl);
 
-BikesMtl.$inject = ['$http'];
+StationDataServiceMtl.$inject = ['$http'];
 
-function BikesMtl($http) {
+function StationDataServiceMtl($http) {
     var BikesMtl = {
       all: all,
       get: get
@@ -36,10 +36,10 @@ function BikesMtl($http) {
     return BikesMtl;
 
     function all() {
-      return $http.get('/bikesmtl/');
+      return $http.get('/api/v1/bikedatanow/');
     }
 
     function get(station_id) {
-      return $http.get('/bikesmtl/' + station_id);
+      return $http.get('/api/v1/bikedatanow/' + station_id);
     }
   }

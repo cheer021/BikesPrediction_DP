@@ -66,7 +66,7 @@ app.controller('myCtrl', function($scope) {
 <div ng-app="myApp" ng-controller="driversController">
 <div id="stationDataNow">
   <p>The available bikes near you</p>
-  <input type="text" ng-model="nameFilter" placeholder="Search..."/>
+  <input type="text" ng-model="nameFilter" placeholder="Search"/>
   <table>
   <thead>
         <tr><th colspan="4">The available bikes in Montreal</th></tr>
@@ -78,7 +78,8 @@ app.controller('myCtrl', function($scope) {
         <td>Last Update</td></tr>
   </thead>
   <tbody>
-
+    <div> The last Service call is at {{lastSvcTime}} </div>
+     <div> Auto refrenshed  {{svcCounter}} times. </div>
     <tr ng-repeat="x in names | filter: nameFilter">
     
     <td> {{x.id}} </td>

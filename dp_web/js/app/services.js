@@ -36,7 +36,18 @@ function BikesMtl($http) {
     return BikesMtl;
 
     function all() {
-      return $http.get('/bikesmtl/');
+      return $http({
+        method: 'GET',
+        url: '../js/service/data.json'
+      }).then(function successCallback(response) {
+    // this callback will be called asynchronously
+    // when the response is available
+    return response.data;
+      }, function errorCallback(response) {
+    // called asynchronously if an error occurs
+    // or server returns response with an error status.
+      return response.status;
+      });
     }
 
     function get(station_id) {

@@ -3,15 +3,38 @@
 
 <body>
 
-{% if station_data_now_list %}
-    <ul>
-    {% for station in station_data_now_list %}
-        <li><a href="/bikesmtl/{{ station.station.station_id }}/">{{ station.station.name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No stations are available.</p>
-{% endif %}
+<div ng-app="myApp" ng-controller="driversController">
+<div id="stationDataNow">
+  <p>The available bikes near you</p>
+  <input type="text" ng-model="nameFilter" placeholder="Search..."/>
+  <table>
+  <thead>
+        <tr><th colspan="4">The available bikes in Montreal</th></tr>
+        <tr>
+        <td>Station Id</td>
+        <td>Name</td>
+        <td>Bikes</td>
+        <td>Docks</td>
+        <td>Last Update</td></tr>
+  </thead>
+  <tbody>
 
+    <tr ng-repeat="x in names | filter: nameFilter">
+    
+    <td> {{x.id}} </td>
+    <td> {{x.name}} </td>
+    <td> {{x.nbBikes }}</td>
+    <td> {{x.nbEmptyDocks }}</td>
+    <td>{{x.lastCommWithServer}}</td>
+  </tr>
+  </tbody>
+  </table>
+</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+<script type="text/javascript" src="/static/js/app/app.js"></script>
+<script type="text/javascript" src="/static/js/app/services.js"></script>
+<script type="text/javascript" src="/static/js/app/ListCtrl.js"></script>
 </body>
 </html>

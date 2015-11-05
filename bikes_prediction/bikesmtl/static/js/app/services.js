@@ -1,33 +1,15 @@
-// define(["jquery","angular"], function(){
+// angular.module('myApp.services', ['ngResource'])
+// .factory('BikesMtl', ['$resource', function($resource) {
+//     return $resource('/crud/bikesmtl/', {'id': '@id'}, {
+//     });
+// }]);
 
-
-//  $.ajax({
-//                         url: "../bike_server.py",
-//                         type: "get",
-//                         datatype:"json",
-//                         success: function(response){
-//                             alert(response.message);
-//                             console.log(response);
-//                         }
-//                     });
-
-// });
-/**
- *  Module
- *
- * Description
- */
-/**
- *  Module
- *
- * Description
- */
 angular.module('myApp.services', [])
-.factory('StationDataServiceMtl', StationDataServiceMtl);
+.factory('BikesMtl', BikesMtl);
 
-StationDataServiceMtl.$inject = ['$http'];
+BikesMtl.$inject = ['$http'];
 
-function StationDataServiceMtl($http) {
+function BikesMtl($http) {
     var BikesMtl = {
       all: all,
       get: get
@@ -36,10 +18,11 @@ function StationDataServiceMtl($http) {
     return BikesMtl;
 
     function all() {
-      return $http.get('/api/v1/bikedatanow/');
+      // return $http.get('/bikesmtl/');
+      return $http.get('/bikesmtl.json');
     }
 
     function get(station_id) {
-      return $http.get('/api/v1/bikedatanow/' + station_id);
+      return $http.get('/bikesmtl/' + station_id);
     }
   }

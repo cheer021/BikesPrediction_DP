@@ -32,9 +32,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
+    # 'django.contrib.admin',
+    # 'django.contrib.auth',
+    # 'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -43,13 +43,13 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    # 'django.contrib.auth.middleware.AuthenticationMiddleware',
+    # 'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
+    # 'django.middleware.security.SecurityMiddleware',
 )
 
 ROOT_URLCONF = 'bikes_prediction.urls'
@@ -89,7 +89,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'UTC'   
 
 USE_I18N = True
 
@@ -104,21 +104,14 @@ USE_TZ = True
 
 # MEDIA_URL = '/media/'
 
-# STATIC_ROOT = 'static/'
+STATIC_ROOT = 'staticfiles'
 
-# STATIC_URL = '/static/'
+STATIC_URL = '/static/'
 
 # STATICFILES_DIRS = (
 #     os.path.join(CURRENT_PATH, 'static'),
 # )
-MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 
-MEDIA_URL = '/media/'
-
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
-
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_DIR, 'bikesmtl/static'),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(PROJECT_DIR, 'bikesmtl/static'),
+# )

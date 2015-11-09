@@ -16,6 +16,8 @@ controller('driversController', function($scope, $interval, BikesMtl) {
             //alert("Just refreshed!");
             //console.log($scope.names);
         });
+
       },5000);
+
 
 });

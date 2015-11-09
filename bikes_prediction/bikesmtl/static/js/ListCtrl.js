@@ -1,8 +1,9 @@
 angular.module('myApp.ListCtrl', []).
 controller('driversController', function($scope, $interval, BikesMtl) {
 	var count = 0;
-    var timer=$interval(function(){
-    	
+
+    $scope.updateBikePredictions = function(){
+        
         BikesMtl.all().then(
         function putIntoData(response) {
             // body...
@@ -17,7 +18,9 @@ controller('driversController', function($scope, $interval, BikesMtl) {
             //console.log($scope.names);
         });
 
-      },5000);
+      }
 
+    $scope.updateBikePredictions();
+    var timer = $interval($scope.updateBikePredictions, 5000);
 
 });

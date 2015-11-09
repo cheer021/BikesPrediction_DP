@@ -4,10 +4,10 @@ from . import views
 
 urlpatterns = patterns('',
 	url(r'^$', views.index, name='index'),
-	# url(r'^bikesmtl/$', StationDataNowList.as_view(), name='station-data-now-list'),
-	# url(r'^crud/bikesmtl/?$', MyCRUDView.as_view(), name='my_crud_view'),
-	url(r'^bikesmtl$', views.MyResponseView.as_view(), {'invoke_method': 'get_all_data'}),
-    # url(r'^fetch-other-data.json$', views.MyResponseView.as_view(), {'invoke_method': 'get_other_data'}),
-	# url(r'^$', TemplateView.as_view(template_name='index.html')),
-    # url(r'^(?P<station_id>[0-9]+)/$', views.detail, name='detail'),
+	url(r'^bikesmtl/stations/all/info$', views.MyResponseView.as_view(), {'invoke_method': 'get_all_station_info'}),
+	url(r'^bikesmtl/stations/(?P<station_id>[0-9]+)/info$', views.MyResponseView.as_view(), {'invoke_method': 'get_station_info'}),
+	url(r'^bikesmtl/stations/all/now$', views.MyResponseView.as_view(), {'invoke_method': 'get_all_data_now'}),
+	url(r'^bikesmtl/stations/(?P<station_id>[0-9]+)/now$', views.MyResponseView.as_view(), {'invoke_method': 'get_station_data_now'}),
+	url(r'^bikesmtl/stations/all/predictions$', views.MyResponseView.as_view(), {'invoke_method': 'get_all_predictions'}),
+	url(r'^bikesmtl/stations/(?P<station_id>[0-9]+)/predictions$', views.MyResponseView.as_view(), {'invoke_method': 'get_station_predictions'}),
 )

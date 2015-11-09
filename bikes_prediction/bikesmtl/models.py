@@ -19,3 +19,17 @@ class StationDataNow(models.Model):
     nb_empty_docks = models.IntegerField()
 
     REQUIRED_FIELDS = ['station', 'last_comm_with_server', 'nb_bikes', 'nb_empty_docks']
+
+class StationDataPredictions(models.Model):
+    station = models.ForeignKey(Station, primary_key = True)
+    updated_at = models.DateTimeField(auto_now=True)
+    nb_bikes_5 = models.IntegerField()
+    nb_empty_docks_5 = models.IntegerField()
+    nb_bikes_10 = models.IntegerField()
+    nb_empty_docks_10 = models.IntegerField()
+    nb_bikes_15 = models.IntegerField()
+    nb_empty_docks_15 = models.IntegerField()
+    nb_bikes_30 = models.IntegerField()
+    nb_empty_docks_30 = models.IntegerField()
+
+    REQUIRED_FIELDS = ['station', 'updated_at', 'nb_bikes_5', 'nb_empty_docks_5', 'nb_bikes_10', 'nb_empty_docks_10', 'nb_bikes_15', 'nb_empty_docks_15', 'nb_bikes_30', 'nb_empty_docks_30']

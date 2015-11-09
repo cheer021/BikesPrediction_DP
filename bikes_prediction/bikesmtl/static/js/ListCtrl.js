@@ -2,9 +2,9 @@ angular.module('myApp.ListCtrl', []).
 controller('driversController', function($scope, $interval, BikesMtl) {
 	var count = 0;
 
-    $scope.updateBikePredictions = function(){
+    $scope.updateAllDataNow = function(){
         
-        BikesMtl.all().then(
+        BikesMtl.allDataNow().then(
         function putIntoData(response) {
             // body...
             count++;
@@ -20,7 +20,8 @@ controller('driversController', function($scope, $interval, BikesMtl) {
 
       }
 
-    $scope.updateBikePredictions();
-    var timer = $interval($scope.updateBikePredictions, 5000);
+    $scope.updateAllDataNow();
+    var timer = $interval($scope.updateAllDataNow, 5000);
+
 
 });

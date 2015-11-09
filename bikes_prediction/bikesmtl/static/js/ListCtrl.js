@@ -10,15 +10,14 @@ controller('driversController', function($scope, $interval, BikesMtl) {
             count++;
             $scope.bikes = {};
             $scope.bikes.predictions = response.mtlData;
-            console.log($scope.bikes.predictions);
+            // console.log($scope.bikes.predictions);
             var d  = new Date();
             $scope.lastSvcTime = d.toTimeString(); 
-            $scope.svcCounter = count
+            $scope.svcCounter = count;
             //alert("Just refreshed!");
             //console.log($scope.names);
         });
-
-      }
+    };
 
     $scope.updateAllDataNow();
     var timer = $interval($scope.updateAllDataNow, 5000);

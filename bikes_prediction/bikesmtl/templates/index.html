@@ -1,11 +1,22 @@
 <!DOCTYPE html>
-<html>
-
-<body>
-
-<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="300" height="200" src="https://maps.google.com/maps?hl=en&q=mcgill&ie=UTF8&t=roadmap&z=14&iwloc=B&output=embed"><div><small><a href="http://embedgooglemaps.com">embedgooglemaps.com</a></small></div><div><small><a href="http://www.premiumlinkgenerator.com/">premiumlinkgenerator.com</a></small></div></iframe>
-
-<div ng-app="myApp" ng-controller="driversController">
+<html ng-app="myApp">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+<script type="text/javascript" src="/static/js/app.js"></script>
+<script type="text/javascript" src="/static/js/services.js"></script>
+<script type="text/javascript" src="/static/js/ListCtrl.js"></script>
+<script type="text/javascript" src="/static/js/mapCtrl.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+<script src="https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/scripts/ng-map.js"></script>
+</head>
+<body  ng-controller="driversController">
+<div id="map"><map center="current-location" zoom="15" on-click
+="zoomChanged()"><info-window id="1" position="current-location"  visible="true">
+      <div ng-non-bindable="">Predition:</div>
+    </info-window></map>
+  </div>
+<div > </div>
 <div id="stationDataNow">
   <p>The available bikes near you</p>
   <input type="text" ng-model="nameFilter" placeholder="Search..."/>
@@ -35,10 +46,5 @@
   </table>
 </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-<script type="text/javascript" src="/static/js/app.js"></script>
-<script type="text/javascript" src="/static/js/services.js"></script>
-<script type="text/javascript" src="/static/js/ListCtrl.js"></script>
 </body>
 </html>

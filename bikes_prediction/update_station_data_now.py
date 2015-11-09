@@ -13,14 +13,22 @@ from bikesmtl.models import Station, StationDataNow
 dataNowMtl = urllib.urlopen('http://montreal.bixi.com/data/bikeStations.xml')
 
 root = etree.parse(dataNowMtl)
+
+if (len(StationDataNow.objects.all()) == 0): empty = True;
+else: empty = False;
+
 lastUpdate = datetime.datetime.utcfromtimestamp(int(int(root.xpath("//stations")[0].get("LastUpdate"))/1000))
 lastUpdate = timezone.make_aware(lastUpdate)
 for ele in root.xpath("//stations/station"):
 	if ele.xpath("installed")[0].text == "true" and ele.xpath("locked")[0].text == "false":
 		# station = StationDataNow(station = Station.objects.filter(station_id = int(ele.xpath("id")[0].text))[0], nb_bikes = int(ele.xpath("nbBikes")[0].text), nb_empty_docks = int(ele.xpath("nbEmptyDocks")[0].text), datetime = timezone.now(), last_comm_with_server = lastUpdate)
 		# station.save()
-		station = StationDataNow.objects.get(station = Station.objects.get(station_id = int(ele.xpath("id")[0].text)))
-		station.nb_bikes = int(ele.xpath("nbBikes")[0].text)
-		station.nb_empty_docks = int(ele.xpath("nbEmptyDocks")[0].text)
-		station.datetime = timezone.now()
-		station.last_comm_with_server = lastUpdate
+		if (empty):
+			s = StationDataNow(station = Station.objects.get(station_id = int(ele.xpath("id")[0].text)), nb_bikes = ele.xpath("nbBikes")[0].text, nb_empty_docks = float(ele.xpath("nbEmptyDocks")[0].text), updated_at = timezone.now(), last_comm_with_server = lastUpdate)
+			s.save()
+		else:
+			station = StationDataNow.objects.get(station = Station.objects.get(station_id = int(ele.xpath("id")[0].text)))
+			station.nb_bikes = int(ele.xpath("nbBikes")[0].text)
+			station.nb_empty_docks = int(ele.xpath("nbEmptyDocks")[0].text)
+			station.updated_at = timezone.now()
+			station.last_comm_with_server = lastUpdate

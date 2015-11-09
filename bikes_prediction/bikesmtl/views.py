@@ -12,19 +12,12 @@ def index(request):
 
 class MyResponseView(JSONResponseMixin, View):
     def get_all_data(self):
-        all_stations = StationDataNow.objects.all()
-        data_list = []
-        for s in all_stations:
-        	data_list.append({'id': s.station.station_id, 
-        		'name': s.station.name,
-        		'nbBikes': s.nb_bikes,
-        		'nbEmptyDocks': s.nb_empty_docks,
-        		'lastCommWithServer': str(s.last_comm_with_server)})
-		output = {'mtlData': data_list}
-		return output
-	
-	def get_other_data(self):
-		return ['baz', 'cap']
+    	all_stations = StationDataNow.objects.all()
+    	data_list = []
+    	for s in all_stations:
+    		data_list.append({'id': s.station.station_id, 'name': s.station.name, 'nbBikes': s.nb_bikes, 'nbEmptyDocks': s.nb_empty_docks, 'lastCommWithServer': str(s.last_comm_with_server)})
+    	output = {'mtlData': data_list}
+    	return output
 
 # def allStations(request):
 	# all_stations = StationDataNow.objects.all()

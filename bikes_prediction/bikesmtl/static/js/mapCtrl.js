@@ -1,5 +1,5 @@
-var app=angular.module('myApp.mapCtrl', ['ngMap']);
-app.controller('driversController', function($scope) {
+angular.module('myApp.mapCtrl', ['ngMap'])
+.controller('mapController', function($scope) {
   $scope.$on('mapInitialized', function(evt, map) {
     var infoWindow = map.infoWindows[1];
     $scope.zoomChanged = function(e) {

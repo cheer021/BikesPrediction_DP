@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bikesmtl',
+    'django_cron',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,6 +52,12 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'django.middleware.security.SecurityMiddleware',
 )
+
+CRON_CLASSES = [
+    "bikesmtl.cron.UpdateStationInfo",
+    "bikesmtl.cron.UpdateStationDataNow",
+    # "bikesmtl.cron.UpdatePredictions",
+]
 
 ROOT_URLCONF = 'bikes_prediction.urls'
 

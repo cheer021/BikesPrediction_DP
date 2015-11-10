@@ -3,6 +3,7 @@ from bikesmtl.models import Station, StationDataNow, StationDataPredictions
 from django.utils import timezone
 import datetime
 import urllib
+import logging
 from lxml import etree
 
 from django_cron import CronJobBase, Schedule
@@ -30,7 +31,7 @@ class UpdateStationDataNow(CronJobBase):
                 except ObjectDoesNotExist:
                     s = StationDataNow(station = Station.objects.get(station_id = int(ele.xpath("id")[0].text)), nb_bikes = ele.xpath("nbBikes")[0].text, nb_empty_docks = float(ele.xpath("nbEmptyDocks")[0].text), updated_at = timezone.now(), last_comm_with_server = lastUpdate)
                     s.save()
-        self.stdout.write("Updated Station Data at " + timezone.now())
+        # self.stdout.write("Updated Station Data at " + timezone.now() + '\n')
                           
 
 class UpdateStationInfo(CronJobBase):
@@ -59,4 +60,4 @@ class UpdateStationInfo(CronJobBase):
                     s.delete()
                 except ObjectDoesNotExist:
                     continue  
-        self.stdout.write("Updated Station Info at " + timezone.now())           
+        # self.stdout.write("Updated Station Info at " + timezone.now() + '\n')           

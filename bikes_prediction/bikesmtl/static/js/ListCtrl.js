@@ -6,11 +6,11 @@ controller('driversController', function($scope, $interval, BikesMtl) {
     $scope.updateAllDataNow = function(){
         
         BikesMtl.allDataNow().then(
-        function putIntoData(response) {
+        function(response) {
             // body...
             count++;
             $scope.bikes.predictions = response.mtlData;
-            // console.log($scope.bikes.predictions);
+             console.log($scope.bikes.predictions);
             var d  = new Date();
             $scope.lastSvcTime = d.toTimeString(); 
             $scope.svcCounter = count;

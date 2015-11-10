@@ -1,0 +1,10 @@
+{% extends "index.html" %}
+{% block map %}
+ <div id="map" ng-controller="mapController">
+        <div>
+            <map center="current-location" zoom="15" on-click="zoomChanged()">
+                <marker position="{[{x.location}]}" icon="{[{x.icon}]}" ng-repeat="x in stations.locations"></marker>
+            </map>
+        </div>
+    </div>
+{% endblock %}

@@ -3,7 +3,10 @@ from . import views
 # from .api import MyCRUDView
 
 urlpatterns = patterns('',
-	url(r'^$', views.index, name='index'),
+	url(r'^index', views.index, name='index'),
+	url(r'^$', views.mapView, name='mapView'),
+	url(r'^map', views.mapView, name='mapView'),
+	url(r'^list', views.listView, name='listView'),
 	url(r'^bikesmtl/stations/all/info$', views.MyResponseView.as_view(), {'invoke_method': 'get_all_station_info'}),
 	url(r'^bikesmtl/stations/(?P<station_id>[0-9]+)/info$', views.MyResponseView.as_view(), {'invoke_method': 'get_station_info'}),
 	url(r'^bikesmtl/stations/all/now$', views.MyResponseView.as_view(), {'invoke_method': 'get_all_data_now'}),

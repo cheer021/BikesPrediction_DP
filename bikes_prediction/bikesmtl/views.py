@@ -10,6 +10,12 @@ from .models import Station, StationDataNow, StationDataPredictions
 def index(request):
 	return render(request, 'index.html')
 
+def mapView(request):
+	return render(request, 'mapView.html')
+
+def listView(request):
+	return render(request, 'listView.html')
+
 class MyResponseView(JSONResponseMixin, View):
 	def get_all_station_info(self):
 		all_stations = Station.objects.all()

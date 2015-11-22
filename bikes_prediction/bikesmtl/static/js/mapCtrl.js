@@ -23,10 +23,10 @@ angular.module('myApp.mapCtrl', ['ngMap'])
                     	//console.log(s);
                     	empDocksCounts.push(s.nbEmptyDocks);
                     }
-                    //console.log("1");
+                    console.log("1");
                     //$scope.stations.locations=locations;
                     //$scope.stations.locations["count"] = empDocksCounts;
-                    //console.log(empDocksCounts) ;
+                    console.log(empDocksCounts) ;
                     
         		}).then(function(){
         			$scope.getLocations();
@@ -39,7 +39,7 @@ angular.module('myApp.mapCtrl', ['ngMap'])
         			var locations = [];
         			var index=0;
         			//$scope.getBikeCounts();
-        			//console.log("2");
+        			//console.log(response.mtlData);
         			//console.log(empDocksCounts);
                     for(var s of response.mtlData){
                     	//console.log(s);
@@ -47,7 +47,7 @@ angular.module('myApp.mapCtrl', ['ngMap'])
                     	index++;
                     }
                     $scope.stations.locations=locations;
-                   //console.log(empDocksCounts);
+                   console.log($scope.stations.locations);
                 });
         };
         

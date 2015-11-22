@@ -3,7 +3,8 @@
 <div class="container">
  	<div id="map" ng-controller="mapController">
         <div>
-            <map center="current-location" zoom="15" on-click="zoomChanged()" style="min-height:500px">
+
+            <map id= "mymap"center="current-location" zoom="15" >
                 <marker position="{[{x.location}]}" icon="{[{x.icon}]}" ng-repeat="x in stations.locations"></marker>
             </map>
         </div>

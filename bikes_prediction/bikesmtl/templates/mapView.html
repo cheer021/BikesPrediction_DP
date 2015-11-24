@@ -1,12 +1,14 @@
-{% extends "index.html" %}
-{% block map %}
+{% extends "index.html" %} {% block map %}
 <div class="container">
- 	<div id="map" ng-controller="mapController">
+    <div id="map" ng-controller="mapController">
         <div>
-
-            <map id= "mymap"center="current-location" zoom="15" >
-                <marker position="{[{x.location}]}" icon="{[{x.icon}]}" ng-repeat="x in stations.locations"></marker>
-            </map>
+            <ng-map id="mymap" center="current-location" zoom="15" >
+                <marker id="mymarker" position="{[{x.location}]}" on-click="showInfoWindow(event, 'marker-info')" icon="{[{x.icon}]}" animation="Animation.drop" ng-repeat="x in stations.locations"></marker>
+                <info-window id="marker-info">
+                    <div> <p> Prediction: </p> 
+                    Actual:</div>
+                </info-window>
+            </ng-map>
         </div>
     </div>
 </div>

@@ -15,7 +15,6 @@ def mapView(request):
 
 def listView(request):
 	return render(request, 'listView.html')
-
 class MyResponseView(JSONResponseMixin, View):
 	def get_all_station_info(self):
 		all_stations = Station.objects.all()

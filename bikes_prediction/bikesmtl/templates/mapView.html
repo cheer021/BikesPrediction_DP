@@ -1,12 +1,31 @@
 {% extends "index.html" %} {% block map %}
 <div class="container">
+	<div class="row" ng-controller="btnController">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input id="timeInput" type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+   
+         <button  ng-click="getPrediction(btnId)" type="button" class="btn btn-default">Predict</button>
+
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+    </div>
     <div id="map" ng-controller="mapController">
         <div>
             <ng-map id="mymap" center="current-location" zoom="15" >
                 <marker id="mymarker" position="{[{x.location}]}" on-click="showInfoWindow(event, 'marker-info')" icon="{[{x.icon}]}" animation="Animation.drop" ng-repeat="x in stations.locations"></marker>
                 <info-window id="marker-info">
-                    <div> <p> Prediction: </p> 
-                    Actual:</div>
+                    <div> Actual:  </div>
                 </info-window>
             </ng-map>
         </div>

@@ -62,6 +62,5 @@ angular.module('myApp.mapCtrl', ['ngMap'])
         };
 
         $scope.getBikeCounts();
-        //map.showInfoWindow("mymap");
 
     });

@@ -58,7 +58,22 @@ angular.module('myApp.mapCtrl', ['ngMap'])
         };
         $scope.getPrediction = function() {
             //redraw the map 
-             $scope.getPredictionCounts();
+            console.log($('#timeInput').val());
+            
+            $scope.postProcess();
+            $scope.getPredictionCounts();
+            
+        };
+        $scope.postProcess = function(){
+            var preProcess = $('#timeInput').val();
+            var monthProcessed = parseInt(preProcess.split("/",2)[0]);
+            var dayProcessed = parseInt(preProcess.split("/",2)[1]);
+            var hourToProcess = parseInt(preProcess.split(" ")[1].substring(0, 2));
+            var hourProcessed = (preProcess.indexOf("PM")>-1)? (hourToProcess+12):hourToProcess;
+            $scope.timeToPass = {month:monthProcessed, day: dayProcessed, hour: hourProcessed};
+            console.log($scope.timeToPass);
+
+
         };
         $scope.getPredictionCounts();
 

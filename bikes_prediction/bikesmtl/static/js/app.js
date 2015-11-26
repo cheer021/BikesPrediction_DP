@@ -1,10 +1,12 @@
-angular.module('myApp', [
+var myApp = angular.module('myApp', [
     'myApp.ListCtrl',
     'myApp.services',
-    'myApp.mapCtrl',
-    'myApp.btnCtrl'
-]).config(function($httpProvider,$interpolateProvider) {
+    'myApp.mapCtrl'
+]);
+myApp.config(function($httpProvider,$interpolateProvider) {
     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     $interpolateProvider.startSymbol('{[{');
   $interpolateProvider.endSymbol('}]}');
 });
+
+

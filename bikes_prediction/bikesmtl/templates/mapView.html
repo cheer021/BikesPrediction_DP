@@ -1,6 +1,6 @@
 {% extends "index.html" %} {% block map %}
-<div class="container">
-	<div class="row" ng-controller="btnController">
+<div class="container" ng-controller="mapController">
+	<div class="row" >
         <div class='col-sm-6'>
             <div class="form-group">
                 <div class='input-group date' id='datetimepicker1'>
@@ -12,7 +12,7 @@
             </div>
         </div>
    
-         <button  ng-click="getPrediction(btnId)" type="button" class="btn btn-default">Predict</button>
+         <button  ng-click="getPrediction()" type="button" class="btn btn-default">Predict</button>
 
         <script type="text/javascript">
             $(function () {
@@ -20,14 +20,14 @@
             });
         </script>
     </div>
-    <div id="map" ng-controller="mapController">
+    <div id="map" >
         <div>
-            <ng-map id="mymap" center="current-location" zoom="15" >
-                <marker id="mymarker" position="{[{x.location}]}" on-click="showInfoWindow(event, 'marker-info')" icon="{[{x.icon}]}" animation="Animation.drop" ng-repeat="x in stations.locations"></marker>
+            <map id="mymap" center="current-location" zoom="15" >
+                <marker id="mymarker{[{x.index}]}" position="{[{x.location}]}" on-click="showInfoWindow(event, 'marker-info')" icon="{[{x.icon}]}" animation="Animation.drop" ng-repeat="x in stations.locations"></marker>
                 <info-window id="marker-info">
-                    <div> Actual:  </div>
+                    <div> Actual: {[{actualCount}]}  </div>
                 </info-window>
-            </ng-map>
+            </map>
         </div>
     </div>
 </div>

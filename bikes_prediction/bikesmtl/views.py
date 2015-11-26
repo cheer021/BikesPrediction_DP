@@ -1,11 +1,10 @@
 import json
+import sqlite3
+
 from django.shortcuts import render
 from django.http import *
-
 from django.views.generic import View
 from djangular.views.mixins import JSONResponseMixin
-
-from .models import Station, StationDataNow, StationDataPredictions
 
 def index(request):
 	return render(request, 'index.html')
@@ -15,74 +14,57 @@ def mapView(request):
 
 def listView(request):
 	return render(request, 'listView.html')
+
 class MyResponseView(JSONResponseMixin, View):
+	
 	def get_all_station_info(self):
-		all_stations = Station.objects.all()
+		conn = sqlite3.connect('bikedb')
+		c = conn.cursor()
+		c.execute("select * from bikesmtl_station order by station")
+		all_stations = c.fetchall()
 		data_list = []
 		for s in all_stations:
-			data_list.append({'id': s.station_id, 
-				'name': s.name, 
-				'latitude': s.latitude, 
-				'longitude': str(s.longitude)})
+			data_list.append({'id': s[4], 
+				'name': s[0], 
+				'latitude': s[1], 
+				'longitude': s[2]})
 		output = {'mtlData': data_list}
+		conn.close()
 		return output
-	def get_station_info(self, station_id):
-		station = Station.objects.get(station_id = station_id)
-		data = {'id': station_id, 
-			'name': station.name, 
-			'latitude': station.latitude, 
-			'longitude': str(station.longitude)}
-		return data
 
-	def get_all_data_now(self):
-		all_stations = StationDataNow.objects.all()
+	def get_all_predictions(self, month, day, hour):
+		conn = sqlite3.connect('bikedb')
+		c = conn.cursor()
+		c.execute("select * from predicted_data_hourly where month=? and day=? and hour=?", (month, day, hour))
+		predictions = c.fetchone()[3:] #remove month,day,hour from result
+		bikes = predictions[:len(predictions)/2]
+		docks = predictions[len(predictions)/2:]
+		c.execute("select station from bikesmtl_station order by station")
+		all_stations = list(sum(c.fetchall(), ()))
 		data_list = []
-		for s in all_stations:
-			data_list.append({'id': s.station.station_id, 
-				'name': s.station.name,
-				'nbBikes': s.nb_bikes, 
-				'nbEmptyDocks': s.nb_empty_docks, 
-				'lastCommWithServer': str(s.last_comm_with_server)})
+		for i,s in enumerate(all_stations):
+			data_list.append({'id': s, 
+				'nbBikes': bikes[i], 
+				'nbEmptyDocks': docks[i]})
 		output = {'mtlData': data_list}
+		conn.close()
 		return output
 
-	def get_station_data_now(self, station_id):
-		station = Station.objects.get(station_id = station_id)
-		stationData = StationDataNow.objects.get(station = station)
-		data = {'id': station_id, 
-			'nbBikes': stationData.nb_bikes, 
-			'nbEmptyDocks': stationData.nb_empty_docks, 
-			'lastCommWithServer': str(stationData.last_comm_with_server)}
-		return data
-
-	def get_all_predictions(self):
-		all_stations = StationDataPredictions.objects.all()
+	def get_all_actual(self, month, day, hour):
+		conn = sqlite3.connect('bikedb')
+		c = conn.cursor()
+		c.execute("select * from y_data_hourly where month=? and day=? and hour=?", (month, day, hour))
+		actual = c.fetchone()[3:] #remove month,day,hour from result
+		bikes = actual[:len(actual)/2]
+		docks = actual[len(actual)/2:]
+		c.execute("select station from bikesmtl_station order by station")
+		all_stations = list(sum(c.fetchall(), ()))
 		data_list = []
-		for s in all_stations:
-			data_list.append({'id': s.station.station_id, 
-				'nbBikes5': s.nb_bikes_5, 
-				'nbEmptyDocks5': s.nb_empty_docks_5, 
-				'nbBikes10': s.nb_bikes_10, 
-				'nbEmptyDocks10': s.nb_empty_docks_10, 
-				'nbBikes15': s.nb_bikes_15, 
-				'nbEmptyDocks15': s.nb_empty_docks_15, 
-				'nbBikes30': s.nb_bikes_30, 
-				'nbEmptyDocks30': s.nb_empty_docks_30, 
-				'updatedAt': str(s.updated_at)})
+		for i,s in enumerate(all_stations):
+			data_list.append({'id': s, 
+				'nbBikes': bikes[i], 
+				'nbEmptyDocks': docks[i]})
 		output = {'mtlData': data_list}
+		conn.close()
 		return output
 
-	def get_station_predictions(self, station_id):
-		station = Station.objects.get(station_id = station_id)
-		stationData = StationDataPredictions.objects.get(station = station)
-		data = {'id': station_id, 
-			'nbBikes5': stationData.nb_bikes_5, 
-			'nbEmptyDocks5': stationData.nb_empty_docks_5, 
-			'nbBikes10': stationData.nb_bikes_10, 
-			'nbEmptyDocks10': stationData.nb_empty_docks_10, 
-			'nbBikes15': stationData.nb_bikes_15, 
-			'nbEmptyDocks15': stationData.nb_empty_docks_15, 
-			'nbBikes30': stationData.nb_bikes_30, 
-			'nbEmptyDocks30': stationData.nb_empty_docks_30, 
-			'updatedAt': str(stationData.updated_at)}
-		return data

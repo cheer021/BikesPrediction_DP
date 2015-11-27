@@ -2,6 +2,7 @@ angular.module('myApp.mapCtrl', ['ngMap'])
     .controller('mapController', function($scope, BikesMtl) {
 
         $scope.stations = {};
+        $scope.timeToPass = {month: 4, day: 23, hour: 1}; //use it as default value to predict
         $scope.$on('mapInitialized', function(evt, map) {});
         var empDocksCounts = [];
         var icon_prefix = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=';
@@ -51,7 +52,30 @@ angular.module('myApp.mapCtrl', ['ngMap'])
         };
         $scope.getPrediction = function() {
             //redraw the map 
-             $scope.getPredictionCounts();
+            
+            $scope.postProcess();
+            $scope.getPredictionCounts();
+            
+        };
+        $scope.postProcess = function(){
+            var preProcess = $('#timeInput').val();
+            if(preProcess==""){
+                alert("the date is empty");
+                return;
+            }
+
+            var monthProcessed = parseInt(preProcess.split("/",2)[0]);
+            var dayProcessed = parseInt(preProcess.split("/",2)[1]);
+            var hourToProcess = parseInt(preProcess.split(" ")[1].substring(0, 2));
+            var hourProcessed = (preProcess.indexOf("PM")>-1)? (hourToProcess+12):hourToProcess;
+            $scope.timeToPass = {month:monthProcessed, day: dayProcessed, hour: hourProcessed};
+            //console.log($scope.timeToPass);
+
+
+        };
+        $scope.actualCount = function(){
+            var actualCount = 5;
+            return actualCount;
         };
         $scope.getPredictionCounts();
 

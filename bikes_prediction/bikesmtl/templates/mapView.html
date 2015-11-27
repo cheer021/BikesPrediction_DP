@@ -23,7 +23,7 @@
     <div id="map" >
         <div>
             <map id="mymap" center="current-location" zoom="15" >
-                <marker id="mymarker{[{x.index}]}" position="{[{x.location}]}" on-click="showInfoWindow(event, 'marker-info')" icon="{[{x.icon}]}" animation="Animation.drop" ng-repeat="x in stations.locations"></marker>
+                <marker data-ng-init="markerId='{[{x.index}]}';" position="{[{x.location}]}" on-click="showInfoWindow(event, 'marker-info')" icon="{[{x.icon}]}" animation="Animation.drop" ng-repeat="x in stations.locations"></marker>
                 <info-window id="marker-info">
                     <div> Actual: {[{actualCount()}]}  </div>
                 </info-window>

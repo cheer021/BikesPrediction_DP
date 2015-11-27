@@ -5,31 +5,22 @@ controller('driversController', function($scope, $interval, BikesMtl) {
     var name = [];
     $scope.updateAllDataNow = function() {
 
-        BikesMtl.allDataNow().then(
+        BikesMtl.allActual(4,23,0).then(
             function(response) {
-                // body...
-                count++;
-                //$scope.bikes.predictions = response.mtlData;
-                // for (var s of response) {
-                //     //console.log(s);
-                //     console.log(response.nbBikes);
-                // }
-                //var index=0;;
                 console.log(response.mtlData);
-        
-                $scope.bikes.predictions = response.mtlData;
-                var d = new Date();
-                $scope.lastSvcTime = d.toTimeString();
-                $scope.svcCounter = count;
+            });
+        BikesMtl.allPredictions(4,23,0).then(
+            function(response) {
+                console.log(response.mtlData);
             });
     };
     $scope.getStationsNames = function(argument) {
         // body...
         BikesMtl.allInfo().then(
             function(response) {
-
-                names = [];
-                var index = 0;
+                console.log(response.mtlData);
+                // names = [];
+                // var index = 0;
                 //$scope.getBikeCounts();
                 //console.log("2");
                 //console.log(empDocksCounts);

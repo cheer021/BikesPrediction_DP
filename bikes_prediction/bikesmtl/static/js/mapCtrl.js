@@ -9,21 +9,14 @@ angular.module('myApp.mapCtrl', ['ngMap'])
         var icon_yellow_end = '|FFFF00|000000';
         var icon_red_end = '|FF0000|000000';
         $scope.getPredictionCounts = function() {
-            //console.log("0");
-            BikesMtl.allDataNow().then(
+            BikesMtl.allActual(4,23,0).then(
                 function(response) {
-                    for (var s of response.mtlData) {
-                        //console.log(s);
-                        empDocksCounts.push(s.nbEmptyDocks);
-                    }
-                    //console.log("1");
-                    //$scope.stations.locations=locations;
-                    //$scope.stations.locations["count"] = empDocksCounts;
-                    //console.log(empDocksCounts) ;
-                    console.log("all data have been loaded");
-                }).then(function() {
-                $scope.getLocations();
-            });
+                    console.log(response.mtlData);
+                });
+            BikesMtl.allPredictions(4,23,0).then(
+                function(response) {
+                    console.log(response.mtlData);
+                });
         };
         $scope.getLocations = function() {
             BikesMtl.allInfo().then(
